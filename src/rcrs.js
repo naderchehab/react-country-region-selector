@@ -1,6 +1,8 @@
 import React from 'react';
 import CountryRegionData from './source-data.js';
 import PropTypes from 'prop-types';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 const C = {
   DISPLAY_TYPE_FULL: 'full',
@@ -23,9 +25,7 @@ class CountryDropdown extends React.Component {
 
     return this.state.countries.map(([countryName, countrySlug]) => {
       return (
-        <option value={(valueType === C.DISPLAY_TYPE_SHORT) ? countrySlug : countryName} key={countrySlug}>
-          {(labelType === C.DISPLAY_TYPE_SHORT) ? countrySlug : countryName}
-        </option>
+        <MenuItem value={(valueType === C.DISPLAY_TYPE_SHORT) ? countrySlug : countryName} key={countrySlug} primaryText={(labelType === C.DISPLAY_TYPE_SHORT) ? countrySlug : countryName} />
       );
     });
   }
@@ -36,7 +36,7 @@ class CountryDropdown extends React.Component {
       return null;
     }
     return (
-      <option value="" key="default">{defaultOptionLabel}</option>
+      <MenuItem value="" key="default" primaryText={defaultOptionLabel} />
     );
   }
 
@@ -45,7 +45,7 @@ class CountryDropdown extends React.Component {
     const attrs = {
       name,
       value,
-      onChange: (e) => onChange(e.target.value, e),
+      onChange,
       disabled
     };
     if (id) {
@@ -56,10 +56,10 @@ class CountryDropdown extends React.Component {
     }
 
     return (
-      <select {...attrs}>
+      <SelectField {...attrs}>
         {this.getDefaultOption()}
         {this.getCountries()}
-      </select>
+      </SelectField>
     );
   }
 }
@@ -143,7 +143,7 @@ class RegionDropdown extends React.Component {
     return this.state.regions.map(({ regionName, regionShortCode }) => {
       const label = (labelType === C.DISPLAY_TYPE_FULL) ? regionName : regionShortCode;
       const value = (valueType === C.DISPLAY_TYPE_FULL) ? regionName : regionShortCode;
-      return <option value={value} key={regionName}>{label}</option>;
+      return <MenuItem value={value} key={regionName} primaryText={label} />
     });
   }
 
@@ -152,10 +152,10 @@ class RegionDropdown extends React.Component {
   getDefaultOption () {
     const { blankOptionLabel, showDefaultOption, defaultOptionLabel, country } = this.props;
     if (!country) {
-      return <option value="">{blankOptionLabel}</option>;
+      return <MenuItem value="" primaryText={blankOptionLabel} />
     }
     if (showDefaultOption) {
-      return <option value="">{defaultOptionLabel}</option>;
+      return <MenuItem value="" primaryText={defaultOptionLabel} />
     }
     return null;
   }
@@ -166,7 +166,7 @@ class RegionDropdown extends React.Component {
     const attrs = {
       name,
       value,
-      onChange: (e) => onChange(e.target.value, e),
+      onChange,
       disabled: isDisabled
     };
     if (id) {
@@ -177,10 +177,10 @@ class RegionDropdown extends React.Component {
     }
 
     return (
-      <select {...attrs}>
+      <SelectField {...attrs}>
         {this.getDefaultOption()}
         {this.getRegionList()}
-      </select>
+      </SelectField>
     );
   }
 }

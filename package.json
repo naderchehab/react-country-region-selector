@@ -1,10 +1,11 @@
 {
-  "name": "react-country-region-selector",
-  "version": "1.2.2",
+  "name": "react-country-region-selector-material-ui",
+  "version": "1.0.0",
   "description": "CountryDropdown and RegionDropdown React components for your forms.",
   "main": "lib/rcrs.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
     ]
   },
   "dependencies": {
+    "material-ui": "^0.19.4",
     "prop-types": "^15.5.8",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
